@@ -4,18 +4,19 @@ import { getDerivedCart } from '../utils/getDerivedCart';
 import { productsContext } from '../context/ProductsContext';
 import CartItem from './CartItem';
 import { Link } from 'react-router-dom';
-
-
-
-
-
+import './cart.css';
 
 import { getTotalCartPrice } from '../utils/getTotalCartPrice';
 function Cart() {
-  const { cart } = useContext(productsContext);
+  const { cart, removeFromCart } = useContext(productsContext);
   const derivedCart = getDerivedCart(cart);
+
+  const handleRemoveItem = (id) => {
+    removeFromCart(id);
+  };
   return (
-    <>
+
+    <article className='cart-container'>
       <table>
         <thead>
           <tr>
@@ -25,7 +26,7 @@ function Cart() {
           </tr>
         </thead>
         <tbody>
-          {derivedCart?.map((item) => <CartItem key={item.id} item={item} />)}
+          {derivedCart?.map((item) => <CartItem key={item.id} item={item} onRemoveItem={handleRemoveItem} />)}
         </tbody>
         <tfoot>
           <tr>
@@ -34,7 +35,8 @@ function Cart() {
         </tfoot>
       </table>
       <Link to={-1}>Volver</Link>
-    </>
+    </article>
+
   );
 }
 

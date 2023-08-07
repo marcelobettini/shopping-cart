@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-function CartItem({ item }) {
+function CartItem({ item, onRemoveItem }) {
   return (
     <tr>
       <td>{item.name}</td>
       <td>{item.quantity}</td>
       <td>${item.totalPrice.toFixed(2)}</td>
+      <td onClick={() => onRemoveItem(item.id)}>X</td>
     </tr>
 
 

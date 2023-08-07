@@ -5,7 +5,7 @@ import { card, cardBtn, cardInnerContainer, cardPriceBtn, cardPrice } from '../s
 import PropTypes from 'prop-types';
 import { productsContext } from '../context/ProductsContext';
 const Product = ({ prod }) => {
-  const { addCart } = useContext(productsContext);
+  const { addToCart } = useContext(productsContext);
   const [isFullDescription, setIsFullDescription] = useState(false);
   const handleExpand = () => {
     setIsFullDescription(!isFullDescription);
@@ -17,7 +17,7 @@ const Product = ({ prod }) => {
         <img src={prod.image} alt={prod.title} style={{ width: '50%' }} />
         <div style={cardPriceBtn}>
           <p style={cardPrice}>${prod.price}</p>
-          <button style={cardBtn} onClick={() => addCart(prod)}>comprar</button>
+          <button style={cardBtn} onClick={() => addToCart(prod)}>comprar</button>
         </div>
       </div>
       {isFullDescription ? (<span >{prod.description}<MdExpandLess className='icon-more-less' size={27} title='more info' onClick={handleExpand} /></span>) : (<span>{prod.description.slice(0, 40)}...<MdExpandMore className='icon-more-less' size={27} title='less info' onClick={handleExpand} /></span>)}

@@ -11,8 +11,13 @@ export const ProductContextProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [cart, updateCart] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
-  const addCart = prod => {
+  const addToCart = prod => {
     updateCart(prev => [...prev, prod]);
+  };
+
+  const removeFromCart = id => {
+    updateCart(cart.filter(p => p.id !== id));
+
   };
   const handleMinPrice = (newMin) => {
     setMinPrice(prev => prev = newMin);
@@ -36,7 +41,7 @@ export const ProductContextProvider = ({ children }) => {
     fetchData();
   }, []);
   return (
-    <productsContext.Provider value={{ products, isLoading, error, cart, addCart, minPrice, handleMinPrice }}>
+    <productsContext.Provider value={{ products, isLoading, error, cart, minPrice, addToCart, removeFromCart, handleMinPrice }}>
       {children}
     </productsContext.Provider>
   );

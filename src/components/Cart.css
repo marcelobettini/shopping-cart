@@ -1,0 +1,18 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-container {
+  padding: 1rem;
+  background-color: aliceblue;
+  width: clamp(50%, 450px, 100%);
+  border-radius: 7px;
+  border: 10px transparent;
+  border-right: 20px solid thistle;
+  box-shadow: 4px 4px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
