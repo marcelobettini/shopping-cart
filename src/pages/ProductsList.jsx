@@ -1,29 +1,61 @@
-import Product from '../components/Product';
-import React, { useContext } from 'react';
-import { productsContext } from '../context/ProductsContext';
-import NavBar from '../components/NavBar';
-import CartSummary from '../components/CartSummary';
-import FilterByPrice from '../components/FilterByPrice';
+import Product from "../components/Product";
+import React, { useContext } from "react";
+import { productsContext } from "../context/ProductsContext";
+import NavBar from "../components/NavBar";
+import CartSummary from "../components/CartSummary";
+import FilterByPrice from "../components/FilterByPrice";
+import Sort from "../components/Sort";
 
 const ProductsList = () => {
-  const { products, isLoading, error, minPrice } = useContext(productsContext);
+  const { products, isLoading, error, maxPrice } = useContext(productsContext);
 
-  if (isLoading) return <div><h2>Loading...</h2></div>;
-  if (error) return <div><h2>{error}</h2></div>;
-  return products?.length && (
-    <>
-      <header className='header'>
-        <h1>Tienda Fake</h1>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+  if (isLoading)
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
+  if (error)
+    return (
+      <div>
+        <h2>{error}</h2>
+      </div>
+    );
+  return (
+    products?.length && (
+      <>
+        <header style={{ height: "110px" }}>
+          <h1 style={{ textAlign: "center" }}>Tienda Fake</h1>
           <NavBar />
-          <FilterByPrice />
-          <CartSummary />
-        </div>
-      </header>
-      <main className='container'>
-        {products.filter(p => p.price > minPrice).map((prod) => <Product key={prod.id} prod={prod} />)}
-      </main>
-    </>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                columnGap: "1em",
+              }}
+            >
+              <FilterByPrice />
+              <Sort />
+            </div>
+            <CartSummary />
+          </div>
+        </header>
+        <main className="container">
+          {products
+            .filter((p) => p.price <= maxPrice)
+            .map((prod) => (
+              <Product key={prod.id} prod={prod} />
+            ))}
+        </main>
+      </>
+    )
   );
 };
 

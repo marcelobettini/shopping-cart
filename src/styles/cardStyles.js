@@ -30,7 +30,9 @@ export const cardPrice = {
 
 export const cardBtn = {
   border: "none",
+  alignSelf: "center",
   height: "40px",
+  width: "120px",
   cursor: "pointer",
   backgroundColor: "black",
   color: "white",

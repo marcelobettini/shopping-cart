@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { initialProduct } from "../services/initialProduct";
 import { getAllProducts } from "../services/productService";
 
@@ -10,17 +10,30 @@ export const ProductContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cart, updateCart] = useState([]);
-  const [minPrice, setMinPrice] = useState(0);
-  const addToCart = prod => {
-    updateCart(prev => [...prev, prod]);
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [sortedMaxtoMin, setSortedMaxtoMin] = useState(false);
+
+  const handleSort = () => {
+    if (sortedMaxtoMin) {
+      const sortedProducts = products.toSorted((a, b) => a.price - b.price);
+      setProducts(sortedProducts);
+    } else {
+      const sortedProducts = products.toSorted((a, b) => b.price - a.price);
+      setProducts(sortedProducts);
+    }
+    setSortedMaxtoMin(!sortedMaxtoMin);
   };
 
-  const removeFromCart = id => {
-    updateCart(cart.filter(p => p.id !== id));
-
+  const addToCart = (prod) => {
+    updateCart((prev) => [...prev, prod]);
   };
-  const handleMinPrice = (newMin) => {
-    setMinPrice(prev => prev = newMin);
+
+  const removeFromCart = (id) => {
+    updateCart(cart.filter((p) => p.id !== id));
+  };
+
+  const handleMaxPrice = (newMax) => {
+    setMaxPrice((prev) => (prev = newMax));
   };
 
   const fetchData = async () => {
@@ -41,11 +54,24 @@ export const ProductContextProvider = ({ children }) => {
     fetchData();
   }, []);
   return (
-    <productsContext.Provider value={{ products, isLoading, error, cart, minPrice, addToCart, removeFromCart, handleMinPrice }}>
+    <productsContext.Provider
+      value={{
+        products,
+        isLoading,
+        error,
+        cart,
+        maxPrice,
+        sortedMaxtoMin,
+        addToCart,
+        removeFromCart,
+        handleMaxPrice,
+        handleSort,
+      }}
+    >
       {children}
     </productsContext.Provider>
   );
 };
 ProductContextProvider.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
