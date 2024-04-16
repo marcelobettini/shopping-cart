@@ -12,6 +12,7 @@ export const ProductContextProvider = ({ children }) => {
   const [cart, updateCart] = useState([]);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [sortedMaxtoMin, setSortedMaxtoMin] = useState(false);
+  const [query, setQuery] = useState("");
 
   const handleSort = () => {
     if (sortedMaxtoMin) {
@@ -35,6 +36,8 @@ export const ProductContextProvider = ({ children }) => {
   const handleMaxPrice = (newMax) => {
     setMaxPrice((prev) => (prev = newMax));
   };
+
+  const handleQuery = (text) => setQuery(text);
 
   const fetchData = async () => {
     try {
@@ -62,10 +65,12 @@ export const ProductContextProvider = ({ children }) => {
         cart,
         maxPrice,
         sortedMaxtoMin,
+        query,
         addToCart,
         removeFromCart,
         handleMaxPrice,
         handleSort,
+        handleQuery,
       }}
     >
       {children}

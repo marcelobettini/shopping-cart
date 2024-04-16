@@ -12,7 +12,7 @@ function FilterByPrice() {
         id="maxPrice"
         min={0}
         max={1000}
-        step={10}
+        step={5}
         defaultValue={1000}
         onChange={(e) => handleMaxPrice(+e.target.value)}
       />{" "}

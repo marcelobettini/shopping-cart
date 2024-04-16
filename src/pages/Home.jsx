@@ -1,15 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import CartSummary from '../components/CartSummary';
-import NavBar from '../components/NavBar';
+import CartSummary from "../components/CartSummary";
+import NavBar from "../components/NavBar";
 
 function Home() {
   return (
     <>
-      <header className='header'>
-        <h1>Tienda Fake</h1>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-
+      <header className="header">
+        <h1 style={{ textAlign: "center" }}>Tienda Fake</h1>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <NavBar />
           <CartSummary />
         </div>
@@ -17,7 +16,6 @@ function Home() {
       <section>
         <h2>Página principal</h2>
       </section>
-
     </>
   );
 }
