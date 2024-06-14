@@ -4,7 +4,7 @@ import { getDerivedCart } from '../utils/getDerivedCart';
 import { productsContext } from '../context/ProductsContext';
 import CartItem from './CartItem';
 import { Link } from 'react-router-dom';
-import './cart.css';
+import './Cart.css';
 
 import { getTotalCartPrice } from '../utils/getTotalCartPrice';
 function Cart() {
